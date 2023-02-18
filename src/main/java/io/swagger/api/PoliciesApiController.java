@@ -41,12 +41,27 @@ public class PoliciesApiController implements PoliciesApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<List<Policy>>(objectMapper.readValue("{}", List.class), HttpStatus.NOT_IMPLEMENTED);
+                System.out.println("Inside Get Policies Request Method !!");
+                String HealthPolicy = "healthPolicy";
+                String SafteyPolicy = "safetyPolicy";
+                return new ResponseEntity<List<Policy>>(objectMapper.readValue("[\n" +
+                        "    {\n" +
+                        "        \"policyId\": \"P001\",\n" +
+                        "        \"name\": \"Health Insurance\",\n" +
+                        "        \"detail\": \"Family Health Insurance\"\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"policyId\": \"P002\",\n" +
+                        "        \"name\": \"Car Insurance\",\n" +
+                        "        \"detail\": \"Tata Nexon Car Insurance\"\n" +
+                        "    }\n" +
+                        "]", List.class), HttpStatus.OK);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<List<Policy>>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
+        System.out.println("End of Get Policies Request Method");
 
         return new ResponseEntity<List<Policy>>(HttpStatus.NOT_IMPLEMENTED);
     }

@@ -25,7 +25,7 @@ import java.util.List;
 
 @Validated
 @Api(value = "policies", description = "the policies API")
-@RequestMapping(value = "/nichrome/InsuranceAPI/1.0.0")
+@RequestMapping(value = "/insuranceapi")
 public interface PoliciesApi {
 
     @ApiOperation(value = "Retrieve a list of policies", nickname = "policiesGet", notes = "Returns a list of all policies in the system", response = Policy.class, responseContainer = "List", tags={  })
