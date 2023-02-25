@@ -28,7 +28,7 @@ public class PolicyHolder   {
   private String email = null;
 
   @JsonProperty("address")
-  private Address address = null;
+  private String addressId = null;
 
   public PolicyHolder firstName(String firstName) {
     this.firstName = firstName;
@@ -90,9 +90,40 @@ public class PolicyHolder   {
     this.email = email;
   }
 
-  public PolicyHolder address(Address address) {
-    this.address = address;
+  public PolicyHolder address(String addressId) {
+    this.addressId = addressId;
     return this;
+  }
+
+  public String getAddressId() {
+    return addressId;
+  }
+
+  public void setAddressId(String addressId) {
+    this.addressId = addressId;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    PolicyHolder that = (PolicyHolder) o;
+    return firstName.equals(that.firstName) && lastName.equals(that.lastName) && email.equals(that.email) && addressId.equals(that.addressId);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(firstName, lastName, email, addressId);
+  }
+
+  @Override
+  public String toString() {
+    return "PolicyHolder{" +
+            "firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", email='" + email + '\'' +
+            ", addressId='" + addressId + '\'' +
+            '}';
   }
 
   /**
@@ -103,47 +134,6 @@ public class PolicyHolder   {
 
   @Valid
 
-  public Address getAddress() {
-    return address;
-  }
-
-  public void setAddress(Address address) {
-    this.address = address;
-  }
-
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    PolicyHolder policyHolder = (PolicyHolder) o;
-    return Objects.equals(this.firstName, policyHolder.firstName) &&
-        Objects.equals(this.lastName, policyHolder.lastName) &&
-        Objects.equals(this.email, policyHolder.email) &&
-        Objects.equals(this.address, policyHolder.address);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(firstName, lastName, email, address);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class PolicyHolder {\n");
-    
-    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
-    sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    address: ").append(toIndentedString(address)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
 
   /**
    * Convert the given object to string with each line indented by 4 spaces
