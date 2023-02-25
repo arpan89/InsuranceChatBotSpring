@@ -7,7 +7,7 @@ import java.util.Objects;
  * Address
  */
 @Entity
-public class Address   {
+public class AddressEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +26,7 @@ public class Address   {
   @Column
   private String zipCode;
 
-  public Address street(String street) {
+  public AddressEntity street(String street) {
     this.street = street;
     return this;
   }
@@ -39,7 +39,7 @@ public class Address   {
     this.street = street;
   }
 
-  public Address city(String city) {
+  public AddressEntity city(String city) {
     this.city = city;
     return this;
   }
@@ -52,7 +52,7 @@ public class Address   {
     this.city = city;
   }
 
-  public Address state(String state) {
+  public AddressEntity state(String state) {
     this.state = state;
     return this;
   }
@@ -65,7 +65,7 @@ public class Address   {
     this.state = state;
   }
 
-  public Address zipCode(String zipCode) {
+  public AddressEntity zipCode(String zipCode) {
     this.zipCode = zipCode;
     return this;
   }
@@ -87,11 +87,11 @@ public class Address   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Address address = (Address) o;
-    return Objects.equals(this.street, address.street) &&
-        Objects.equals(this.city, address.city) &&
-        Objects.equals(this.state, address.state) &&
-        Objects.equals(this.zipCode, address.zipCode);
+    AddressEntity addressEntity = (AddressEntity) o;
+    return Objects.equals(this.street, addressEntity.street) &&
+        Objects.equals(this.city, addressEntity.city) &&
+        Objects.equals(this.state, addressEntity.state) &&
+        Objects.equals(this.zipCode, addressEntity.zipCode);
   }
 
   @Override

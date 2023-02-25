@@ -1,19 +1,20 @@
 package io.swagger.entity;
 
-import org.springframework.stereotype.Component;
 import org.threeten.bp.LocalDate;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Objects;
 
 /**
  * Policy
  */
-@Component
+//@Component
 @Entity
-public class Policy   {
+@Table(name="policy")
+public class PolicyEntity {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column
   private Long policyId;
 
@@ -21,10 +22,10 @@ public class Policy   {
   private String policyNumber;
 
   @Column
-  private LocalDate startDate;
+  private Date startDate;
 
   @Column
-  private LocalDate endDate;
+  private Date endDate;
 
   @Column
   private Float premiumAmount;
@@ -32,7 +33,11 @@ public class Policy   {
   @Column
   private Long policyHolderId;
 
-  public Policy id(Long id) {
+  public PolicyEntity() {
+
+  }
+
+  public PolicyEntity id(Long id) {
     this.policyId = id;
     return this;
   }
@@ -45,7 +50,7 @@ public class Policy   {
     this.policyId = policyId;
   }
 
-  public Policy policyNumber(String policyNumber) {
+  public PolicyEntity policyNumber(String policyNumber) {
     this.policyNumber = policyNumber;
     return this;
   }
@@ -58,33 +63,33 @@ public class Policy   {
     this.policyNumber = policyNumber;
   }
 
-  public Policy startDate(LocalDate startDate) {
+  public PolicyEntity startDate(Date startDate) {
     this.startDate = startDate;
     return this;
   }
 
-  public LocalDate getStartDate() {
+  public Date getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(LocalDate startDate) {
+  public void setStartDate(Date startDate) {
     this.startDate = startDate;
   }
 
-  public Policy endDate(LocalDate endDate) {
+  public PolicyEntity endDate(Date endDate) {
     this.endDate = endDate;
     return this;
   }
 
-  public LocalDate getEndDate() {
+  public Date getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(LocalDate endDate) {
+  public void setEndDate(Date endDate) {
     this.endDate = endDate;
   }
 
-  public Policy premiumAmount(Float premiumAmount) {
+  public PolicyEntity premiumAmount(Float premiumAmount) {
     this.premiumAmount = premiumAmount;
     return this;
   }
@@ -97,7 +102,7 @@ public class Policy   {
     this.premiumAmount = premiumAmount;
   }
 
-  public Policy policyHolder(Long policyHolderId) {
+  public PolicyEntity policyHolder(Long policyHolderId) {
     this.policyHolderId = policyHolderId;
     return this;
   }
@@ -114,8 +119,8 @@ public class Policy   {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    Policy policy = (Policy) o;
-    return policyId.equals(policy.policyId) && policyNumber.equals(policy.policyNumber) && startDate.equals(policy.startDate) && endDate.equals(policy.endDate) && premiumAmount.equals(policy.premiumAmount) && policyHolderId.equals(policy.policyHolderId);
+    PolicyEntity policyEntity = (PolicyEntity) o;
+    return policyId.equals(policyEntity.policyId) && policyNumber.equals(policyEntity.policyNumber) && startDate.equals(policyEntity.startDate) && endDate.equals(policyEntity.endDate) && premiumAmount.equals(policyEntity.premiumAmount) && policyHolderId.equals(policyEntity.policyHolderId);
   }
 
   @Override

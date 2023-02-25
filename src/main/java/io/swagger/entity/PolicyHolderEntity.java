@@ -7,7 +7,7 @@ import java.util.Objects;
  * PolicyHolder
  */
 @Entity
-public class PolicyHolder   {
+public class PolicyHolderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +25,7 @@ public class PolicyHolder   {
     @Column
     private Long addressId;
 
-    public PolicyHolder(Long policyHolderId) {
+    public PolicyHolderEntity(Long policyHolderId) {
         this.policyHolderId = policyHolderId;
     }
 
@@ -37,7 +37,7 @@ public class PolicyHolder   {
         this.policyHolderId = policyHolderId;
     }
 
-    public PolicyHolder firstName(String firstName) {
+    public PolicyHolderEntity firstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
@@ -50,7 +50,7 @@ public class PolicyHolder   {
         this.firstName = firstName;
     }
 
-    public PolicyHolder lastName(String lastName) {
+    public PolicyHolderEntity lastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
@@ -63,7 +63,7 @@ public class PolicyHolder   {
         this.lastName = lastName;
     }
 
-    public PolicyHolder email(String email) {
+    public PolicyHolderEntity email(String email) {
         this.email = email;
         return this;
     }
@@ -80,7 +80,7 @@ public class PolicyHolder   {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PolicyHolder that = (PolicyHolder) o;
+        PolicyHolderEntity that = (PolicyHolderEntity) o;
         return policyHolderId.equals(that.policyHolderId) && firstName.equals(that.firstName) && lastName.equals(that.lastName) && email.equals(that.email) && addressId.equals(that.addressId);
     }
 

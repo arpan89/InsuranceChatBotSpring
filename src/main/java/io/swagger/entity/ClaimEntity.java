@@ -9,7 +9,7 @@ import java.util.Objects;
  * Claim
  */
 @Entity
-public class Claim   {
+public class ClaimEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column
@@ -41,7 +41,7 @@ public class Claim   {
     this.claimId = claimId;
   }
 
-  public Claim claimNumber(String claimNumber) {
+  public ClaimEntity claimNumber(String claimNumber) {
     this.claimNumber = claimNumber;
     return this;
   }
@@ -54,7 +54,7 @@ public class Claim   {
     this.claimNumber = claimNumber;
   }
 
-  public Claim policyId(String policyId) {
+  public ClaimEntity policyId(String policyId) {
     this.policyId = policyId;
     return this;
   }
@@ -72,7 +72,7 @@ public class Claim   {
     this.policyId = policyId;
   }
 
-  public Claim dateOfIncident(LocalDate dateOfIncident) {
+  public ClaimEntity dateOfIncident(LocalDate dateOfIncident) {
     this.dateOfIncident = dateOfIncident;
     return this;
   }
@@ -85,7 +85,7 @@ public class Claim   {
     this.dateOfIncident = dateOfIncident;
   }
 
-  public Claim description(String description) {
+  public ClaimEntity description(String description) {
     this.description = description;
     return this;
   }
@@ -98,7 +98,7 @@ public class Claim   {
     this.description = description;
   }
 
-  public Claim status(String status) {
+  public ClaimEntity status(String status) {
     this.status = status;
     return this;
   }
@@ -111,7 +111,7 @@ public class Claim   {
     this.status = status;
   }
 
-  public Claim amount(Float amount) {
+  public ClaimEntity amount(Float amount) {
     this.amount = amount;
     return this;
   }
@@ -128,8 +128,8 @@ public class Claim   {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    Claim claim = (Claim) o;
-    return claimId.equals(claim.claimId) && claimNumber.equals(claim.claimNumber) && policyId.equals(claim.policyId) && dateOfIncident.equals(claim.dateOfIncident) && description.equals(claim.description) && status.equals(claim.status) && amount.equals(claim.amount);
+    ClaimEntity claimEntity = (ClaimEntity) o;
+    return claimId.equals(claimEntity.claimId) && claimNumber.equals(claimEntity.claimNumber) && policyId.equals(claimEntity.policyId) && dateOfIncident.equals(claimEntity.dateOfIncident) && description.equals(claimEntity.description) && status.equals(claimEntity.status) && amount.equals(claimEntity.amount);
   }
 
   @Override
