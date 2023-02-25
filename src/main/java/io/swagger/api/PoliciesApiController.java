@@ -3,8 +3,11 @@ package io.swagger.api;
 import io.swagger.model.Policy;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
+import io.swagger.processor.PolicyProcessor;
+import io.swagger.service.PolicyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,6 +33,9 @@ public class PoliciesApiController implements PoliciesApi {
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
+
+    @Autowired
+    private PolicyProcessor policyProcessor;
 
     @org.springframework.beans.factory.annotation.Autowired
     public PoliciesApiController(ObjectMapper objectMapper, HttpServletRequest request) {
@@ -99,18 +105,22 @@ public class PoliciesApiController implements PoliciesApi {
         return new ResponseEntity<Policy>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Policy> policiesPost(@ApiParam(value = "The policy to add" ,required=true )  @Valid @RequestBody Policy policy) {
+    public ResponseEntity<String> policiesPost(@ApiParam(value = "The policy to add" ,required=true )  @Valid @RequestBody Policy policy) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Policy>(objectMapper.readValue("{\"empty\": false}", Policy.class), HttpStatus.NOT_IMPLEMENTED);
+                Boolean policyAdded = policyProcessor.processPolicyAdd(policy);
+                if(policyAdded) {
+                    return new ResponseEntity<>("Policy Added successfully", HttpStatus.CREATED);
+                }
+                return new ResponseEntity<String>("Some error occured in processing",HttpStatus.INTERNAL_SERVER_ERROR);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Policy>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<String>("",HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<Policy>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<String>("Issue in Accept Header",HttpStatus.NOT_IMPLEMENTED);
     }
 
 }

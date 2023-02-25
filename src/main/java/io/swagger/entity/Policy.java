@@ -1,5 +1,6 @@
 package io.swagger.entity;
 
+import org.springframework.stereotype.Component;
 import org.threeten.bp.LocalDate;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.Objects;
 /**
  * Policy
  */
+@Component
 @Entity
 public class Policy   {
   @Id

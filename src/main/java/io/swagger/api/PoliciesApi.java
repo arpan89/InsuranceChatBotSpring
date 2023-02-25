@@ -75,6 +75,6 @@ public interface PoliciesApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    ResponseEntity<Policy> policiesPost(@ApiParam(value = "The policy to add" ,required=true )  @Valid @RequestBody Policy policy);
+    ResponseEntity<String> policiesPost(@ApiParam(value = "The policy to add" ,required=true )  @Valid @RequestBody Policy policy);
 
 }
