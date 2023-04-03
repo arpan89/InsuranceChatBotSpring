@@ -34,4 +34,9 @@ public class PolicyService {
             return false;
         }
     }
+
+    public PolicyEntity getPolicy(String policyId) {
+        PolicyEntity policyEntity = policyRepository.findOne(Long.valueOf(policyId));
+        return policyEntity;
+    }
 }

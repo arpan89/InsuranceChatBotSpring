@@ -1,6 +1,7 @@
 package io.swagger.processor;
 
 import io.swagger.dao.PolicyDao;
+import io.swagger.entity.PolicyEntity;
 import io.swagger.model.Policy;
 import io.swagger.service.PolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,11 @@ public class PolicyProcessor {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public PolicyEntity processPolicyGet(String policyId) throws IOException {
+        PolicyEntity policy = policyService.getPolicy(policyId);
+        System.out.println("Policy Details :: "+policy.toString());
+        return policy;
     }
 }
