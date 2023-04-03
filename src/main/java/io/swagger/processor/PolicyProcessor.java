@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 
 @Component
 public class PolicyProcessor {
@@ -35,5 +36,11 @@ public class PolicyProcessor {
         PolicyEntity policy = policyService.getPolicy(policyId);
         System.out.println("Policy Details :: "+policy.toString());
         return policy;
+    }
+
+    public List<PolicyEntity> processListPolicyGet(String startDate) throws IOException {
+
+        List<PolicyEntity> listPolicy = policyService.getListPolicy(startDate);
+        return listPolicy;
     }
 }

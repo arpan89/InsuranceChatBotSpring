@@ -38,11 +38,13 @@ public class PoliciesApiController implements PoliciesApi {
         this.request = request;
     }
 
-    public ResponseEntity<List<Policy>> policiesGet() {
+    public ResponseEntity<List<Policy>> policiesGet(String startDate, String endDate) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
                 System.out.println("Inside Get Policies Request Method !!");
+                List<PolicyEntity> policyEntities = policyProcessor.processListPolicyGet(startDate);
+                System.out.println("PolicyEntities :: "+policyEntities.toString());
                 String HealthPolicy = "healthPolicy";
                 String SafteyPolicy = "safetyPolicy";
                 return new ResponseEntity<List<Policy>>(objectMapper.readValue("[\n" +

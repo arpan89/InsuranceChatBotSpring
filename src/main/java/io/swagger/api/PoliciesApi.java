@@ -27,11 +27,12 @@ public interface PoliciesApi {
     @ApiOperation(value = "Retrieve a list of policies", nickname = "policiesGet", notes = "Returns a list of all policies in the system", response = Policy.class, responseContainer = "List", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "A list of policies", response = Policy.class, responseContainer = "List") })
-    @RequestMapping(value = "/policies",
+    @RequestMapping(value = "/policies/{startDate}/{endDate}",
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.GET)
-    ResponseEntity<List<Policy>> policiesGet();
+    ResponseEntity<List<Policy>> policiesGet(@ApiParam(value = "The startDate of the policies to list",required=true) @PathVariable("startDate") String startDate,
+                                             @ApiParam(value = "The startDate of the policies to list",required=true) @PathVariable("endDate") String endDate);
 
 
     @ApiOperation(value = "Delete a policy", nickname = "policiesPolicyIdDelete", notes = "Deletes the policy with the specified ID", tags={  })

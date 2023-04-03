@@ -1,7 +1,18 @@
 package io.swagger.dao;
 
+import io.swagger.entity.PolicyEntity;
+import io.swagger.model.Policy;
 import org.springframework.stereotype.Component;
 import org.threeten.bp.LocalDate;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.List;
 
 @Component
 public class PolicyDao {
@@ -11,6 +22,21 @@ public class PolicyDao {
     private LocalDate endDate;
     private Float premiumAmount;
     private Long policyHolderId;
+
+    @PersistenceContext
+    EntityManager em;
+
+    public List<PolicyEntity> findPolicyByStartAndEndDate (String startDate, String endDate) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<PolicyEntity> cq = cb.createQuery(PolicyEntity.class);
+
+        Root<PolicyEntity> policy = cq.from(PolicyEntity.class);
+        Predicate policyStartDatePredicate = cb.equal(policy.get("startDate"), startDate);
+        cq.where(policyStartDatePredicate);
+
+        TypedQuery<PolicyEntity> query = em.createQuery(cq);
+        return query.getResultList();
+    }
 
     public String getPolicyNumber() {
         return policyNumber;

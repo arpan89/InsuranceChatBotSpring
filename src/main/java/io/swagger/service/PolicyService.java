@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.threeten.bp.DateTimeUtils;
 
+import java.util.List;
+
 @Service
 public class PolicyService {
 
@@ -38,5 +40,11 @@ public class PolicyService {
     public PolicyEntity getPolicy(String policyId) {
         PolicyEntity policyEntity = policyRepository.findOne(Long.valueOf(policyId));
         return policyEntity;
+    }
+
+    public List<PolicyEntity> getListPolicy(String startDate) {
+        PolicyDao policyDao = new PolicyDao();
+        List<PolicyEntity> policies = policyDao.findPolicyByStartAndEndDate(startDate, null);
+        return policies;
     }
 }
