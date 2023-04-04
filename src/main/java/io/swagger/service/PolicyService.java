@@ -7,12 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.threeten.bp.DateTimeUtils;
 
+import javax.persistence.EntityManager;
+import java.text.ParseException;
 import java.util.List;
 
 @Service
 public class PolicyService {
 
     private PolicyRepository policyRepository;
+
+    private EntityManager em;
+
+    @Autowired
+    public void PolicyService(EntityManager em) {
+        this.em = em;
+    }
 
     @Autowired
     public void PolicyService(PolicyRepository policyRepository) {
@@ -42,8 +51,8 @@ public class PolicyService {
         return policyEntity;
     }
 
-    public List<PolicyEntity> getListPolicy(String startDate) {
-        PolicyDao policyDao = new PolicyDao();
+    public List<PolicyEntity> getListPolicy(String startDate) throws ParseException {
+        PolicyDao policyDao = new PolicyDao(em);
         List<PolicyEntity> policies = policyDao.findPolicyByStartAndEndDate(startDate, null);
         return policies;
     }

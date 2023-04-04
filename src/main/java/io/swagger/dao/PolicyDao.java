@@ -12,6 +12,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -24,14 +27,24 @@ public class PolicyDao {
     private Long policyHolderId;
 
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
-    public List<PolicyEntity> findPolicyByStartAndEndDate (String startDate, String endDate) {
+    public PolicyDao() {
+
+    }
+
+    public PolicyDao(EntityManager em) {
+        this.em = em;
+    }
+
+    public List<PolicyEntity> findPolicyByStartAndEndDate (String startDate, String endDate) throws ParseException {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = df.parse(startDate);
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<PolicyEntity> cq = cb.createQuery(PolicyEntity.class);
 
         Root<PolicyEntity> policy = cq.from(PolicyEntity.class);
-        Predicate policyStartDatePredicate = cb.equal(policy.get("startDate"), startDate);
+        Predicate policyStartDatePredicate = cb.equal(policy.get("startDate"), date);
         cq.where(policyStartDatePredicate);
 
         TypedQuery<PolicyEntity> query = em.createQuery(cq);

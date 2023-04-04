@@ -11,12 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2023-02-12T07:11:07.511Z")
 
@@ -38,35 +40,26 @@ public class PoliciesApiController implements PoliciesApi {
         this.request = request;
     }
 
-    public ResponseEntity<List<Policy>> policiesGet(String startDate, String endDate) {
+    public ResponseEntity<List<PolicyEntity>> policiesGet(@ApiParam(value = "The startDate of the policies to list",required=true) @PathVariable("startDate") String startDate,
+                                                          @ApiParam(value = "The endDate of the policies to list",required=true) @PathVariable("endDate") String endDate) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
                 System.out.println("Inside Get Policies Request Method !!");
                 List<PolicyEntity> policyEntities = policyProcessor.processListPolicyGet(startDate);
                 System.out.println("PolicyEntities :: "+policyEntities.toString());
-                String HealthPolicy = "healthPolicy";
-                String SafteyPolicy = "safetyPolicy";
-                return new ResponseEntity<List<Policy>>(objectMapper.readValue("[\n" +
-                        "    {\n" +
-                        "        \"policyId\": \"P001\",\n" +
-                        "        \"name\": \"Health Insurance\",\n" +
-                        "        \"detail\": \"Family Health Insurance\"\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "        \"policyId\": \"P002\",\n" +
-                        "        \"name\": \"Car Insurance\",\n" +
-                        "        \"detail\": \"Tata Nexon Car Insurance\"\n" +
-                        "    }\n" +
-                        "]", List.class), HttpStatus.OK);
+                return new ResponseEntity<List<PolicyEntity>>(policyEntities, HttpStatus.OK);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<Policy>>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<List<PolicyEntity>>(HttpStatus.INTERNAL_SERVER_ERROR);
+            } catch (ParseException e) {
+                log.error("Couldn't serialize response for content type application/json", e);
+                return new ResponseEntity<List<PolicyEntity>>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
         System.out.println("End of Get Policies Request Method");
 
-        return new ResponseEntity<List<Policy>>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<List<PolicyEntity>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Void> policiesPolicyIdDelete(@ApiParam(value = "The ID of the policy to delete",required=true) @PathVariable("policyId") String policyId) {
