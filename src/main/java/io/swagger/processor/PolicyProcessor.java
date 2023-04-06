@@ -3,6 +3,7 @@ package io.swagger.processor;
 import io.swagger.dao.PolicyDao;
 import io.swagger.entity.PolicyEntity;
 import io.swagger.model.Policy;
+import io.swagger.repository.PolicyRepository;
 import io.swagger.service.PolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,9 @@ public class PolicyProcessor {
 
     @Autowired
     private PolicyService policyService;
+
+    @Autowired
+    private PolicyRepository policyRepository;
 
     public boolean processPolicyAdd(Policy policy) throws IOException {
         try{
@@ -43,5 +47,12 @@ public class PolicyProcessor {
 
         List<PolicyEntity> listPolicy = policyService.getListPolicy(startDate);
         return listPolicy;
+    }
+
+    public int processPolicyDelete(String policyId) {
+
+        int returnDelValue = policyRepository.deletePolicyByPolicyId(Long.valueOf(policyId));
+
+        return returnDelValue;
     }
 }

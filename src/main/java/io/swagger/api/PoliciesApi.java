@@ -42,7 +42,7 @@ public interface PoliciesApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.DELETE)
-    ResponseEntity<Void> policiesPolicyIdDelete(@ApiParam(value = "The ID of the policy to delete",required=true) @PathVariable("policyId") String policyId);
+    ResponseEntity<String> policiesPolicyIdDelete(@ApiParam(value = "The ID of the policy to delete",required=true) @PathVariable("policyId") String policyId);
 
 
     @ApiOperation(value = "Retrieve a policy by ID", nickname = "policiesPolicyIdGet", notes = "Returns the policy with the specified ID", response = Policy.class, tags={  })

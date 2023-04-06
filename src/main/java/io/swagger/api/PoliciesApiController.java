@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -62,9 +61,24 @@ public class PoliciesApiController implements PoliciesApi {
         return new ResponseEntity<List<PolicyEntity>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> policiesPolicyIdDelete(@ApiParam(value = "The ID of the policy to delete",required=true) @PathVariable("policyId") String policyId) {
+    public ResponseEntity<String> policiesPolicyIdDelete(@ApiParam(value = "The ID of the policy to delete",required=true) @PathVariable("policyId") String policyId) {
         String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+
+
+        if (accept != null && accept.contains("application/json")) {
+            try {
+                int returnDelValue = policyProcessor.processPolicyDelete(policyId);
+
+                if(returnDelValue > 0)
+                return new ResponseEntity<String>("Policy Deleted Successfully", HttpStatus.OK);
+
+            } catch (Exception e) {
+                log.error("Some error occured in processing", e);
+                return new ResponseEntity<String>("Some error occured in processing",HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        return new ResponseEntity<String>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     // Implemented and Unit Tested
@@ -75,8 +89,6 @@ public class PoliciesApiController implements PoliciesApi {
                 PolicyEntity policyRetrieved = policyProcessor.processPolicyGet(policyId);
 
                     return new ResponseEntity<>(policyRetrieved, HttpStatus.OK);
-
-                //return new ResponseEntity<Policy>(objectMapper.readValue("{\"empty\": false}", Policy.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<PolicyEntity>(HttpStatus.INTERNAL_SERVER_ERROR);

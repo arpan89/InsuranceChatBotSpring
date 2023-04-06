@@ -39,16 +39,36 @@ public class PolicyDao {
 
     public List<PolicyEntity> findPolicyByStartAndEndDate (String startDate, String endDate) throws ParseException {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = df.parse(startDate);
+        Date formattedStartDate = null;
+        Date formattedEndDate = null;
+        if(startDate != null) {
+            formattedStartDate = df.parse(startDate);
+        }
+        if(endDate != null) {
+            formattedEndDate = df.parse(endDate);
+        }
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<PolicyEntity> cq = cb.createQuery(PolicyEntity.class);
 
         Root<PolicyEntity> policy = cq.from(PolicyEntity.class);
-        Predicate policyStartDatePredicate = cb.equal(policy.get("startDate"), date);
-        cq.where(policyStartDatePredicate);
 
-        TypedQuery<PolicyEntity> query = em.createQuery(cq);
-        return query.getResultList();
+        if(formattedStartDate != null && formattedEndDate != null) {
+            Predicate policyStartDatePredicate = cb.equal(policy.get("startDate"), formattedStartDate);
+            Predicate policyEndDatePredicate = cb.equal(policy.get("endDate"), formattedEndDate);
+            cq.where(policyStartDatePredicate, policyEndDatePredicate);
+
+            TypedQuery<PolicyEntity> query = em.createQuery(cq);
+            return query.getResultList();
+        }
+        else if(formattedStartDate != null && formattedEndDate == null) {
+            Predicate policyStartDatePredicate = cb.equal(policy.get("startDate"), formattedStartDate);
+            cq.where(policyStartDatePredicate);
+            TypedQuery<PolicyEntity> query = em.createQuery(cq);
+            return query.getResultList();
+        }
+        else {
+            return  null;
+        }
     }
 
     public String getPolicyNumber() {
