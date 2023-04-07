@@ -25,6 +25,7 @@ public class AddressProcessor {
             addressDao.setState(address.getState());
             addressDao.setZipCode(address.getZipCode());
             addressDao.setStreet(address.getStreet());
+            addressService.addAddress(addressDao);
             return true;
         } catch (Exception e) {
             return false;
