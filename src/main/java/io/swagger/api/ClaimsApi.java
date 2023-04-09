@@ -5,6 +5,8 @@
  */
 package io.swagger.api;
 
+import io.swagger.entity.ClaimEntity;
+import io.swagger.entity.PolicyEntity;
 import io.swagger.model.Claim;
 import io.swagger.model.Policy;
 import io.swagger.annotations.*;
@@ -26,8 +28,17 @@ import java.util.List;
 
 @Validated
 @Api(value = "claims", description = "the claims API")
-@RequestMapping(value = "/nichrome/InsuranceAPI/1.0.0")
+@RequestMapping(value = "/insuranceapi")
 public interface ClaimsApi {
+
+    @ApiOperation(value = "Retrieve a claim by ID", nickname = "claimsClaimIdGet", notes = "Returns the claim with the specified ID", response = Claim.class, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The claim with the specified ID", response = Claim.class) })
+    @RequestMapping(value = "/claims/{claimId}",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<ClaimEntity> claimsClaimIdGet(@ApiParam(value = "The ID of the claim to retrieve",required=true) @PathVariable("claimId") String claimId);
 
     @ApiOperation(value = "Retrieve a list of claims", nickname = "claimsGet", notes = "Returns a list of all claims in the system", response = Claim.class, responseContainer = "List", tags={  })
     @ApiResponses(value = { 
@@ -41,11 +52,11 @@ public interface ClaimsApi {
 
     @ApiOperation(value = "Create a new claim", nickname = "claimsPost", notes = "Adds a new claim to the system", response = Policy.class, tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 201, message = "The newly created policy", response = Policy.class) })
+        @ApiResponse(code = 201, message = "The newly created policy", response = Claim.class) })
     @RequestMapping(value = "/claims",
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    ResponseEntity<Policy> claimsPost(@ApiParam(value = "The claim to add" ,required=true )  @Valid @RequestBody Claim claim);
+    ResponseEntity<String> claimsPost(@ApiParam(value = "The claim to add" ,required=true )  @Valid @RequestBody Claim claim);
 
 }
