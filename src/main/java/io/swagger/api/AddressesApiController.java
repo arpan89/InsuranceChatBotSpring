@@ -84,11 +84,11 @@ public class AddressesApiController implements AddressesApi {
     }
 
     // Implemented and Unit Tested
-    public ResponseEntity<AddressEntity> addressesAddressIdGet(@ApiParam(value = "The ID of the policy to retrieve",required=true) @PathVariable("policyId") String policyId) {
+    public ResponseEntity<AddressEntity> addressesAddressIdGet(@ApiParam(value = "The ID of the policy to retrieve",required=true) @PathVariable("addressId") String addressId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                AddressEntity addressRetrieved = new AddressEntity();//addressProcessor.processAddressGet(addressId);
+                AddressEntity addressRetrieved = addressProcessor.processAddressGet(addressId);
 
                     return new ResponseEntity<>(addressRetrieved, HttpStatus.OK);
             } catch (Exception e) {

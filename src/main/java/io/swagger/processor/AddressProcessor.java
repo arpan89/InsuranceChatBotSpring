@@ -1,6 +1,7 @@
 package io.swagger.processor;
 
 import io.swagger.dao.AddressDao;
+import io.swagger.entity.AddressEntity;
 import io.swagger.model.Address;
 import io.swagger.repository.AddressRepository;
 import io.swagger.service.AddressService;
@@ -30,5 +31,13 @@ public class AddressProcessor {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public AddressEntity processAddressGet(String addressId) {
+        AddressEntity address = addressService.getAddress(addressId);
+        if(address != null)
+        System.out.println("Address Details :: "+address.toString());
+        else System.out.println("No address found with provided addressId :: "+addressId);
+        return address;
     }
 }

@@ -40,4 +40,9 @@ public class AddressService {
             return false;
         }
     }
+
+    public AddressEntity getAddress(String addressId) {
+        AddressEntity addressEntity = addressRepository.findOne(Long.valueOf(addressId));
+        return addressEntity;
+    }
 }

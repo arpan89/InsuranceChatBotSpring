@@ -39,7 +39,9 @@ public class PolicyProcessor {
 
     public PolicyEntity processPolicyGet(String policyId) throws IOException {
         PolicyEntity policy = policyService.getPolicy(policyId);
+        if(policy != null)
         System.out.println("Policy Details :: "+policy.toString());
+        else System.out.println("No policy found with provided policyId"+policyId);
         return policy;
     }
 
