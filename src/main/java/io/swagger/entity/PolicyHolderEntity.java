@@ -25,6 +25,18 @@ public class PolicyHolderEntity {
     @Column
     private Long addressId;
 
+    public PolicyHolderEntity() {
+
+    }
+
+    public Long getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
+    }
+
     public PolicyHolderEntity(Long policyHolderId) {
         this.policyHolderId = policyHolderId;
     }

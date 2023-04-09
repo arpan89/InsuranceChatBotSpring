@@ -65,7 +65,7 @@ public interface PolicyHoldersApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Policy> policyHoldersPolicyHolderIdPut(@ApiParam(value = "The ID of the policyHolder to update",required=true) @PathVariable("policyHolderId") String policyHolderId,@ApiParam(value = "The updated policyHolder information" ,required=true )  @Valid @RequestBody PolicyHolder policyHolder);
+    ResponseEntity<PolicyHolder> policyHoldersPolicyHolderIdPut(@ApiParam(value = "The ID of the policyHolder to update",required=true) @PathVariable("policyHolderId") String policyHolderId,@ApiParam(value = "The updated policyHolder information" ,required=true )  @Valid @RequestBody PolicyHolder policyHolder);
 
 
     @ApiOperation(value = "Create a new policyHolder", nickname = "policyHoldersPost", notes = "Adds a new policyHolder to the system", response = PolicyHolder.class, tags={  })

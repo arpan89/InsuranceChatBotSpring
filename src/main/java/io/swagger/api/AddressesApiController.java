@@ -69,7 +69,7 @@ public class AddressesApiController implements AddressesApi {
 
         if (accept != null && accept.contains("application/json")) {
             try {
-                int returnDelValue = 0;//addressProcessor.processAddressDelete(addressId);
+                int returnDelValue = addressProcessor.processAddressDelete(addressId);
 
                 if(returnDelValue > 0)
                 return new ResponseEntity<String>("Address Deleted Successfully", HttpStatus.OK);

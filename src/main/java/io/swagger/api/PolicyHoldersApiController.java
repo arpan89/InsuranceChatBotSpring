@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.entity.PolicyEntity;
 import io.swagger.entity.PolicyHolderEntity;
 import io.swagger.model.Policy;
+import io.swagger.model.PolicyHolder;
 import io.swagger.processor.PolicyHolderProcessor;
 import io.swagger.processor.PolicyProcessor;
 import org.slf4j.Logger;
@@ -68,7 +69,7 @@ public class PolicyHoldersApiController implements PolicyHoldersApi {
 
         if (accept != null && accept.contains("application/json")) {
             try {
-                int returnDelValue = 0;//policyHolderProcessor.processPolicyHolderDelete(policyHolderId);
+                int returnDelValue = policyHolderProcessor.processPolicyHolderDelete(policyHolderId);
 
                 if(returnDelValue > 0)
                 return new ResponseEntity<String>("PolicyHolder Deleted Successfully", HttpStatus.OK);
@@ -87,7 +88,7 @@ public class PolicyHoldersApiController implements PolicyHoldersApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                PolicyHolderEntity policyRetrieved = null;//policyHolderProcessor.processPolicyHolderGet(policyHolderId);
+                PolicyHolderEntity policyRetrieved = policyHolderProcessor.processPolicyHolderGet(policyHolderId);
 
                     return new ResponseEntity<>(policyRetrieved, HttpStatus.OK);
             } catch (Exception e) {
@@ -99,31 +100,31 @@ public class PolicyHoldersApiController implements PolicyHoldersApi {
         return new ResponseEntity<PolicyHolderEntity>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Policy> policiesPolicyIdPut(@ApiParam(value = "The ID of the policy to update",required=true) @PathVariable("policyId") String policyId,@ApiParam(value = "The updated policy information" ,required=true )  @Valid @RequestBody Policy policy) {
+    public ResponseEntity<PolicyHolder> policyHoldersPolicyHolderIdPut(@ApiParam(value = "The ID of the policyHolder to update",required=true) @PathVariable("policyHolderId") String policyHolderId,@ApiParam(value = "The updated policyHolder information" ,required=true )  @Valid @RequestBody PolicyHolder policyHolder) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Policy>(objectMapper.readValue("{\"empty\": false}", Policy.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<PolicyHolder>(objectMapper.readValue("{\"empty\": false}", PolicyHolder.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Policy>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<PolicyHolder>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<Policy>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<PolicyHolder>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     // Implemented and Unit Tested
-    public ResponseEntity<String> policiesPost(@ApiParam(value = "The policy to add" ,required=true )  @Valid @RequestBody Policy policy) {
+    public ResponseEntity<String> policyHoldersPost(@ApiParam(value = "The policyHolder to add" ,required=true )  @Valid @RequestBody PolicyHolder policyHolder) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                Boolean policyAdded = policyProcessor.processPolicyAdd(policy);
-                if(policyAdded) {
-                    return new ResponseEntity<>("Policy Added successfully", HttpStatus.CREATED);
+                Boolean policyHolderAdded = policyHolderProcessor.processPolicyHolderAdd(policyHolder);
+                if(policyHolderAdded) {
+                    return new ResponseEntity<>("Policy Holder Added successfully", HttpStatus.CREATED);
                 }
                 return new ResponseEntity<String>("Some error occured in processing",HttpStatus.INTERNAL_SERVER_ERROR);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<String>("",HttpStatus.INTERNAL_SERVER_ERROR);
             }

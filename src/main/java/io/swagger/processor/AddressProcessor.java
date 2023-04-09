@@ -40,4 +40,9 @@ public class AddressProcessor {
         else System.out.println("No address found with provided addressId :: "+addressId);
         return address;
     }
+
+    public int processAddressDelete(String addressId) {
+        int returnDelValue = addressRepository.deleteAddressByAddressId(Long.valueOf(addressId));
+        return returnDelValue;
+    }
 }
