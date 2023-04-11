@@ -12,6 +12,9 @@ using appropriate rest endpoints exposed for policy and other important
 details related to their insurance policy account.
 
 You can view the api documentation in swagger-ui by pointing to  
-http://localhost:8080/  
+http://localhost:8091/
+
+You can view h2 database console by pointing to
+http://localhost:8091/h2-console/
 
 Change default port value in application.properties
