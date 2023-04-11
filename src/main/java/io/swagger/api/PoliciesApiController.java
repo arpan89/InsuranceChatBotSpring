@@ -83,8 +83,8 @@ public class PoliciesApiController implements PoliciesApi {
 
     // Implemented and Unit Tested
     public ResponseEntity<PolicyEntity> policiesPolicyIdGet(@ApiParam(value = "The ID of the policy to retrieve",required=true) @PathVariable("policyId") String policyId) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
+        //String accept = request.getHeader("Accept");
+        //if (accept != null && accept.contains("application/json")) {
             try {
                 PolicyEntity policyRetrieved = policyProcessor.processPolicyGet(policyId);
 
@@ -93,9 +93,9 @@ public class PoliciesApiController implements PoliciesApi {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<PolicyEntity>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        }
+        //}
 
-        return new ResponseEntity<PolicyEntity>(HttpStatus.NOT_IMPLEMENTED);
+        //return new ResponseEntity<PolicyEntity>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Policy> policiesPolicyIdPut(@ApiParam(value = "The ID of the policy to update",required=true) @PathVariable("policyId") String policyId,@ApiParam(value = "The updated policy information" ,required=true )  @Valid @RequestBody Policy policy) {
@@ -114,8 +114,8 @@ public class PoliciesApiController implements PoliciesApi {
 
     // Implemented and Unit Tested
     public ResponseEntity<String> policiesPost(@ApiParam(value = "The policy to add" ,required=true )  @Valid @RequestBody Policy policy) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
+        //String accept = request.getHeader("Accept");
+        //if (accept != null && accept.contains("application/json")) {
             try {
                 Boolean policyAdded = policyProcessor.processPolicyAdd(policy);
                 if(policyAdded) {
@@ -126,9 +126,9 @@ public class PoliciesApiController implements PoliciesApi {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<String>("",HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        }
+        //}
 
-        return new ResponseEntity<String>("Issue in Accept Header",HttpStatus.NOT_IMPLEMENTED);
+        //return new ResponseEntity<String>("Issue in Accept Header",HttpStatus.NOT_IMPLEMENTED);
     }
 
 }
