@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.threeten.bp.DateTimeUtils;
 
 import javax.persistence.EntityManager;
+import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
 
@@ -39,7 +40,12 @@ public class ClaimService {
             claimEntity.setAmount(claimDao.getAmount());
             claimEntity.setDescription(claimDao.getDescription());
             claimEntity.setStatus(claimDao.getStatus());
-            claimEntity.setDateOfIncident(claimDao.getDateOfIncident());
+
+            Date dateOfIncidentVar = DateTimeUtils.toSqlDate(claimDao.getDateOfIncident());
+            System.out.println("Date of Incident Value :: "+dateOfIncidentVar.toString());
+            System.out.println("Date of Incident Type :: "+ dateOfIncidentVar.getClass().getCanonicalName());
+
+            claimEntity.setDateOfIncident(DateTimeUtils.toSqlDate(claimDao.getDateOfIncident()));
             claimEntity.setPolicyId(claimDao.getPolicyId());
             System.out.println("Claim Entity :: "+ claimEntity.toString());
             claimRepository.save(claimEntity);

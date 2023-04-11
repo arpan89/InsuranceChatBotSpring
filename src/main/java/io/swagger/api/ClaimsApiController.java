@@ -82,7 +82,7 @@ public class ClaimsApiController implements ClaimsApi {
             try {
                 Boolean claimAdded = claimsProcessor.processClaimAdd(claim);
                 if(claimAdded) {
-                    return new ResponseEntity<>("Policy Added successfully", HttpStatus.CREATED);
+                    return new ResponseEntity<>("Claim Added successfully", HttpStatus.CREATED);
                 }
                 return new ResponseEntity<String>("Some error occured in processing",HttpStatus.INTERNAL_SERVER_ERROR);
             } catch (Exception e) {

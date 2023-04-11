@@ -1,14 +1,17 @@
 package io.swagger.entity;
 
+import org.hibernate.annotations.Type;
 import org.threeten.bp.LocalDate;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Objects;
 
 /**
  * Claim
  */
 @Entity
+@Table(name="claim")
 public class ClaimEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,7 +25,7 @@ public class ClaimEntity {
   private String policyId;
 
   @Column
-  private LocalDate dateOfIncident;
+  private Date dateOfIncident;
 
   @Column
   private String description;
@@ -72,16 +75,16 @@ public class ClaimEntity {
     this.policyId = policyId;
   }
 
-  public ClaimEntity dateOfIncident(LocalDate dateOfIncident) {
+  public ClaimEntity dateOfIncident(Date dateOfIncident) {
     this.dateOfIncident = dateOfIncident;
     return this;
   }
 
-  public LocalDate getDateOfIncident() {
+  public Date getDateOfIncident() {
     return dateOfIncident;
   }
 
-  public void setDateOfIncident(LocalDate dateOfIncident) {
+  public void setDateOfIncident(Date dateOfIncident) {
     this.dateOfIncident = dateOfIncident;
   }
 

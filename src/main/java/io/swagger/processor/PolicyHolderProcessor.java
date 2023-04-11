@@ -33,6 +33,7 @@ public class PolicyHolderProcessor {
             policyHolderDao.setFirstName(policyHolder.getFirstName());
             policyHolderDao.setLastName(policyHolder.getLastName());
             policyHolderDao.setAddressId(Long.valueOf(policyHolder.getAddressId()));
+            policyHolderService.addPolicyHolder(policyHolderDao);
             return true;
         } catch(Exception e) {
             return false;

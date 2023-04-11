@@ -7,6 +7,7 @@ import java.util.Objects;
  * Address
  */
 @Entity
+@Table(name="address")
 public class AddressEntity {
 
   @Id

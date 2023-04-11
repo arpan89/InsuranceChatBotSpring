@@ -7,6 +7,7 @@ import java.util.Objects;
  * PolicyHolder
  */
 @Entity
+@Table(name="policyholder")
 public class PolicyHolderEntity {
 
     @Id
