@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "3fb6acd7-6889-4728-8fce-eb51495dde89",
+		"name": "InsuranceChatBot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Policy Post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"endDate\": \"2036-04-03\",\r\n  \"id\": \"1\",\r\n  \"policyNumber\": \"787\",\r\n  \"premiumAmount\": 5000,\r\n  \"startDate\": \"2023-04-04\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8091/insuranceapi/policies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"insuranceapi",
+						"policies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Claim Post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"claimNumber\": \"1\",\r\n  \"policyId\": \"1\",\r\n  \"dateOfIncident\": \"2023-04-04\",\r\n  \"description\": \"Car was hit by bike\",\r\n  \"status\": \"Pending Approval\",\r\n  \"amount\": 50000.00\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8091/insuranceapi/claims",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"insuranceapi",
+						"claims"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create PolicyHolder Post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"address\": \"2\",\r\n  \"firstName\": \"Rahul\",\r\n  \"lastName\": \"Dravid\",\r\n  \"email\": \"rahul.dravid@gmail.com\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8091/insuranceapi/policyHolders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"insuranceapi",
+						"policyHolders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Address Post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"street\": \"south street\",\r\n  \"city\": \"alpharetta\",\r\n  \"state\": \"georgia\",\r\n  \"zipCode\": \"277002\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8091/insuranceapi/addresses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"insuranceapi",
+						"addresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get List Policy with startDate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8091/insuranceapi/policies/2023-04-04/2033-04-03",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"insuranceapi",
+						"policies",
+						"2023-04-04",
+						"2033-04-03"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Policy with policyId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8091/insuranceapi/policies/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"insuranceapi",
+						"policies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Claim with claimId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8091/insuranceapi/claims/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"insuranceapi",
+						"claims",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Address with addressId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8091/insuranceapi/addresses/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"insuranceapi",
+						"addresses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get PolicyHolder with policyHolderId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8091/insuranceapi/policyHolders/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"insuranceapi",
+						"policyHolders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Policy",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8091/insuranceapi/policies/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"insuranceapi",
+						"policies",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
