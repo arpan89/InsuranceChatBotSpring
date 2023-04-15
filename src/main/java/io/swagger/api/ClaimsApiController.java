@@ -46,20 +46,20 @@ public class ClaimsApiController implements ClaimsApi {
     }
 
     @Override
-    public ResponseEntity<ClaimEntity> claimsClaimIdGet(@ApiParam(value = "The ID of the claim to retrieve",required=true) @PathVariable("claimId") String claimId) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
+    public ResponseEntity<String> claimsClaimIdGet(@ApiParam(value = "The ID of the claim to retrieve",required=true) @PathVariable("claimId") String claimId) {
+        //String accept = request.getHeader("Accept");
+        //if (accept != null && accept.contains("application/json")) {
             try {
                 ClaimEntity claimRetrieved = claimsProcessor.processClaimGet(claimId);
 
-                return new ResponseEntity<>(claimRetrieved, HttpStatus.OK);
+                return new ResponseEntity<String>(claimRetrieved.toString(), HttpStatus.OK);
             } catch (Exception e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<ClaimEntity>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        }
+        //}
 
-        return new ResponseEntity<ClaimEntity>(HttpStatus.NOT_IMPLEMENTED);
+        //return new ResponseEntity<ClaimEntity>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<List<Claim>> claimsGet() {

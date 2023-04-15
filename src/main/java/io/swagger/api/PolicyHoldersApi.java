@@ -52,10 +52,10 @@ public interface PolicyHoldersApi {
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "The policyHolder with the specified ID", response = PolicyHolder.class) })
     @RequestMapping(value = "/policyHolders/{policyHolderId}",
-        produces = { "application/json" }, 
-        consumes = { "application/json" },
+        produces = { "*/*" },
+        consumes = { "*/*" },
         method = RequestMethod.GET)
-    ResponseEntity<PolicyHolderEntity> policyHoldersPolicyHolderIdGet(@ApiParam(value = "The ID of the policyHolder to retrieve",required=true) @PathVariable("policyHolderId") String policyHolderId);
+    ResponseEntity<String> policyHoldersPolicyHolderIdGet(@ApiParam(value = "The ID of the policyHolder to retrieve",required=true) @PathVariable("policyHolderId") String policyHolderId);
 
 
     @ApiOperation(value = "Update a policyHolder", nickname = "policyHoldersPolicyHolderIdPut", notes = "Updates the policyHolder with the specified ID", response = PolicyHolder.class, tags={  })

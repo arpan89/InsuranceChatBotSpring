@@ -50,10 +50,10 @@ public interface AddressesApi {
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "The address with the specified ID", response = Address.class) })
     @RequestMapping(value = "/addresses/{addressId}",
-        produces = { "application/json" }, 
-        consumes = { "application/json" },
+        produces = { "*/*" },
+        consumes = { "*/*" },
         method = RequestMethod.GET)
-    ResponseEntity<AddressEntity> addressesAddressIdGet(@ApiParam(value = "The ID of the address to retrieve",required=true) @PathVariable("addressId") String addressId);
+    ResponseEntity<String> addressesAddressIdGet(@ApiParam(value = "The ID of the address to retrieve",required=true) @PathVariable("addressId") String addressId);
 
 
     @ApiOperation(value = "Update a policy", nickname = "addressesAddressIdPut", notes = "Updates the address with the specified ID", response = Address.class, tags={  })

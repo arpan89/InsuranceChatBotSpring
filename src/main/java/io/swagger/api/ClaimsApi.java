@@ -35,10 +35,10 @@ public interface ClaimsApi {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "The claim with the specified ID", response = Claim.class) })
     @RequestMapping(value = "/claims/{claimId}",
-            produces = { "application/json" },
-            consumes = { "application/json" },
+            produces = { "*/*" },
+            consumes = { "*/*" },
             method = RequestMethod.GET)
-    ResponseEntity<ClaimEntity> claimsClaimIdGet(@ApiParam(value = "The ID of the claim to retrieve",required=true) @PathVariable("claimId") String claimId);
+    ResponseEntity<String> claimsClaimIdGet(@ApiParam(value = "The ID of the claim to retrieve",required=true) @PathVariable("claimId") String claimId);
 
     @ApiOperation(value = "Retrieve a list of claims", nickname = "claimsGet", notes = "Returns a list of all claims in the system", response = Claim.class, responseContainer = "List", tags={  })
     @ApiResponses(value = { 

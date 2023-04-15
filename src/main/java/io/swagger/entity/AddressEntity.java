@@ -102,15 +102,13 @@ public class AddressEntity {
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class Address {\n");
-    
-    sb.append("    street: ").append(toIndentedString(street)).append("\n");
-    sb.append("    city: ").append(toIndentedString(city)).append("\n");
-    sb.append("    state: ").append(toIndentedString(state)).append("\n");
-    sb.append("    zipCode: ").append(toIndentedString(zipCode)).append("\n");
-    sb.append("}");
-    return sb.toString();
+    return "Address{" +
+            "addressId=" + addressId +
+            ", street='" + street + '\'' +
+            ", city='" + city + '\'' +
+            ", state='" + state + '\'' +
+            ", zipCode='" + zipCode + '\'' +
+            '}';
   }
 
   /**

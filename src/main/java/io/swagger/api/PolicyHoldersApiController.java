@@ -84,20 +84,20 @@ public class PolicyHoldersApiController implements PolicyHoldersApi {
     }
 
     // Implemented and Unit Tested
-    public ResponseEntity<PolicyHolderEntity> policyHoldersPolicyHolderIdGet(@ApiParam(value = "The ID of the policyHolder to retrieve",required=true) @PathVariable("policyHolderId") String policyHolderId) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
+    public ResponseEntity<String> policyHoldersPolicyHolderIdGet(@ApiParam(value = "The ID of the policyHolder to retrieve",required=true) @PathVariable("policyHolderId") String policyHolderId) {
+        //String accept = request.getHeader("Accept");
+        //if (accept != null && accept.contains("application/json")) {
             try {
                 PolicyHolderEntity policyRetrieved = policyHolderProcessor.processPolicyHolderGet(policyHolderId);
 
-                    return new ResponseEntity<>(policyRetrieved, HttpStatus.OK);
+                    return new ResponseEntity<String>(policyRetrieved.toString(), HttpStatus.OK);
             } catch (Exception e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<PolicyHolderEntity>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        }
+        //}
 
-        return new ResponseEntity<PolicyHolderEntity>(HttpStatus.NOT_IMPLEMENTED);
+        //return new ResponseEntity<PolicyHolderEntity>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<PolicyHolder> policyHoldersPolicyHolderIdPut(@ApiParam(value = "The ID of the policyHolder to update",required=true) @PathVariable("policyHolderId") String policyHolderId,@ApiParam(value = "The updated policyHolder information" ,required=true )  @Valid @RequestBody PolicyHolder policyHolder) {

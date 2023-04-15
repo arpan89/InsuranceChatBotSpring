@@ -82,16 +82,16 @@ public class PoliciesApiController implements PoliciesApi {
     }
 
     // Implemented and Unit Tested
-    public ResponseEntity<PolicyEntity> policiesPolicyIdGet(@ApiParam(value = "The ID of the policy to retrieve",required=true) @PathVariable("policyId") String policyId) {
+    public ResponseEntity<String> policiesPolicyIdGet(@ApiParam(value = "The ID of the policy to retrieve",required=true) @PathVariable("policyId") String policyId) {
         //String accept = request.getHeader("Accept");
         //if (accept != null && accept.contains("application/json")) {
             try {
                 PolicyEntity policyRetrieved = policyProcessor.processPolicyGet(policyId);
 
-                    return new ResponseEntity<>(policyRetrieved, HttpStatus.OK);
+                    return new ResponseEntity<String>(policyRetrieved.toString(), HttpStatus.OK);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<PolicyEntity>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         //}
 

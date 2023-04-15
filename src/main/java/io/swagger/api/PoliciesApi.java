@@ -49,10 +49,10 @@ public interface PoliciesApi {
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "The policy with the specified ID", response = Policy.class) })
     @RequestMapping(value = "/policies/{policyId}",
-        produces = { "application/json" }, 
-        consumes = { "application/json" },
+        produces = { "*/*" },
+        consumes = { "*/*" },
         method = RequestMethod.GET)
-    ResponseEntity<PolicyEntity> policiesPolicyIdGet(@ApiParam(value = "The ID of the policy to retrieve",required=true) @PathVariable("policyId") String policyId);
+    ResponseEntity<String> policiesPolicyIdGet(@ApiParam(value = "The ID of the policy to retrieve",required=true) @PathVariable("policyId") String policyId);
 
 
     @ApiOperation(value = "Update a policy", nickname = "policiesPolicyIdPut", notes = "Updates the policy with the specified ID", response = Policy.class, tags={  })

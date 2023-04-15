@@ -84,20 +84,20 @@ public class AddressesApiController implements AddressesApi {
     }
 
     // Implemented and Unit Tested
-    public ResponseEntity<AddressEntity> addressesAddressIdGet(@ApiParam(value = "The ID of the policy to retrieve",required=true) @PathVariable("addressId") String addressId) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
+    public ResponseEntity<String> addressesAddressIdGet(@ApiParam(value = "The ID of the policy to retrieve",required=true) @PathVariable("addressId") String addressId) {
+        //String accept = request.getHeader("Accept");
+        //if (accept != null && accept.contains("application/json")) {
             try {
                 AddressEntity addressRetrieved = addressProcessor.processAddressGet(addressId);
 
-                    return new ResponseEntity<>(addressRetrieved, HttpStatus.OK);
+                    return new ResponseEntity<String>(addressRetrieved.toString(), HttpStatus.OK);
             } catch (Exception e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<AddressEntity>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        }
+        //}
 
-        return new ResponseEntity<AddressEntity>(HttpStatus.NOT_IMPLEMENTED);
+        //return new ResponseEntity<String>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Address> addressesAddressIdPut(@ApiParam(value = "The ID of the address to update",required=true) @PathVariable("addressId") String addressId,@ApiParam(value = "The updated address information" ,required=true )  @Valid @RequestBody Address address) {
